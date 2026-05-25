@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | Harry Lahren</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .track-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background-color: var(--color-bg-alt);
+        }
+
+        .track-card {
+            background: white;
+            padding: 3rem;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: var(--shadow-md);
+            border-radius: 8px;
+        }
+
+        .track-card h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .track-card p {
+            text-align: center;
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-main);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            font-family: var(--font-body);
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .success-message {
+            display: none;
+            background: #f0fdf4;
+            border: 1px solid #86efac;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 3rem;
+            color: var(--color-success);
+            margin-bottom: 1rem;
+        }
+
+        .whatsapp-info {
+            background: #f0fdf4;
+            border-left: 4px solid #10b981;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 4px;
+        }
+
+        .whatsapp-info i {
+            color: #25D366;
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .track-card {
+                padding: 2rem 1.5rem;
+            }
+
+            .track-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="./index.html" class="logo">Harry Lahren</a>
+
+                        <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_alternate10?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="../assets/images/women-collection.jpg"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Kids</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Boys</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=boys-shirts">Shirts & Polos</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-trousers">Trousers & Shorts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-outerwear">Outerwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Girls</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=girls-dresses">Dresses & Skirts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-tops">Tops & Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-outerwear">Outerwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-accessories">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Baby</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=baby-boys">Baby Boys</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-girls">Baby Girls</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-gifts">Newborn Gifts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="../assets/images/little-lahren-collection.jpg"
+                                        alt="Kids Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Little Lahren</h3>
+                                        <a href="shop.html?cat=kids" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customise Your Own Link -->
+                <div class="nav-item">
+                    <a href="customise.html" class="nav-link" style="color: var(--color-accent);">Customise Your Own</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="./login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <!-- Men -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                <li><a href="./shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                <li><a href="./shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                <li><a href="./shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                <li><a href="./shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                <li><a href="./shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                <li><a href="./shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                <li><a href="./shop.html?cat=men&sub=belts">Belts</a></li>
+                                <li><a href="./shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&col=savile">Savile Row</a></li>
+                                <li><a href="./shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                <li><a href="./shop.html?cat=men&col=golf">Golf Performance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">
+                    Women
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                <li><a href="./shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                <li><a href="./shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                <li><a href="./shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                <li><a href="./shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                <li><a href="./shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                <li><a href="./shop.html?cat=women&sub=bags">Handbags</a></li>
+                                <li><a href="./shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                <li><a href="./shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                <li><a href="./shop.html?cat=women&col=work">Work Essentials</a></li>
+                                <li><a href="./shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="mobile-nav-item">
+                <a href="./shop.html?cat=kids" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Kids
+                </a>
+            </div>
+
+            <!-- Journal -->
+            <div class="mobile-nav-item">
+                <a href="./journal.html" class="mobile-nav-link" style="display: flex; justify-content: space-between;">
+                    Journal
+                </a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+
+    </div>
+
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggestions"></div>
+            <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <div class="track-container">
+        <div class="track-card">
+            <!-- Form Section -->
+            <div id="trackForm">
+                <h1>Track Your Order</h1>
+                <p>Enter your order details below to track your shipment</p>
+
+                <form onsubmit="event.preventDefault(); submitTrackingRequest();">
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number *</label>
+                        <input type="text" id="orderNumber" required placeholder="e.g., HL-8921">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" required placeholder="name@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number (Optional)</label>
+                        <input type="tel" id="phone" placeholder="+44 7XXX XXXXXX">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                        Track My Order
+                    </button>
+                </form>
+
+                <div class="whatsapp-info">
+                    <p style="margin: 0; display: flex; align-items: center;">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Our team will contact you via WhatsApp for real-time order tracking</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Success Message -->
+            <div id="successMessage" class="success-message">
+                <div class="success-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h2 style="margin-bottom: 1rem; color: var(--color-success);">Request Received!</h2>
+                <p style="color: var(--color-text-main); margin-bottom: 1.5rem;">
+                    Thank you for your tracking request. Our customer service team will be with you shortly via WhatsApp
+                    to provide real-time updates on your order.
+                </p>
+                <div
+                    style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--color-text-muted);">
+                        <strong style="color: var(--color-text-main);">Order Number:</strong> <span
+                            id="displayOrderNumber"></span>
+                    </p>
+                    <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; color: var(--color-text-muted);">
+                        <strong style="color: var(--color-text-main);">Email:</strong> <span id="displayEmail"></span>
+                    </p>
+                </div>
+                <div style="background: #dcfce7; border-radius: 8px; padding: 1.5rem; text-align: left;">
+                    <p style="margin: 0; font-size: 0.95rem; display: flex; align-items: start;">
+                        <i class="fa-brands fa-whatsapp"
+                            style="color: #25D366; font-size: 1.5rem; margin-right: 1rem; margin-top: 0.2rem;"></i>
+                        <span>
+                            <strong style="display: block; margin-bottom: 0.5rem;">What happens next?</strong>
+                            Our team will reach out to you on WhatsApp within the next 15-30 minutes to provide you with
+                            detailed tracking information and answer any questions you may have about your order.
+                        </span>
+                    </p>
+                </div>
+                <button class="btn btn-secondary" onclick="resetForm()" style="width: 100%; margin-top: 1.5rem;">
+                    Track Another Order
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        function submitTrackingRequest() {
+            const orderNumber = document.getElementById('orderNumber').value;
+            const email = document.getElementById('email').value;
+
+            // Display the order details in success message
+            document.getElementById('displayOrderNumber').textContent = orderNumber;
+            document.getElementById('displayEmail').textContent = email;
+
+            // Hide form and show success message
+            document.getElementById('trackForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('show');
+
+            // Scroll to top of card
+            document.querySelector('.track-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function resetForm() {
+            // Reset form
+            document.getElementById('orderNumber').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+
+            // Show form and hide success message
+            document.getElementById('trackForm').style.display = 'block';
+            document.getElementById('successMessage').classList.remove('show');
+
+            // Scroll to top of card
+            document.querySelector('.track-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage
+                        with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=sport">Sport</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/shipping.html">Shipping & Returns</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/size-guide.html">Size Guide</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./track-order.html">Track Order</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./terms.html">Terms of Service</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display: flex; gap: 1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

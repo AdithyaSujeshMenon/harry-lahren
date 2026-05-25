@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harry Lahren | Timeless British Elegance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Page Specific Styles */
+        .hero {
+            height: min(82svh, 760px);
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--color-white);
+            position: relative;
+            overflow: hidden;
+            background-image: url("assets/images/hero-fabric-composite.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(0, 0, 0, 0.52), rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.48)),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.52));
+            z-index: 0;
+        }
+
+        /* Carousel Slides */
+        .carousel-slides {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 10;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .hero-subtitle {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--color-white);
+        }
+
+        .hero-title {
+            font-size: clamp(3.6rem, 5.4vw, 5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            color: var(--color-white);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Carousel Navigation Dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.75rem;
+            z-index: 20;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+        }
+
+        .carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot.active {
+            background: var(--color-accent);
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        /* Carousel Arrow Controls */
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .carousel-arrow:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-arrow-prev {
+            left: 2rem;
+        }
+
+        .carousel-arrow-next {
+            right: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Collections Grid */
+        .home-collections-section {
+            position: relative;
+            z-index: 12;
+            margin-top: clamp(-7.25rem, -7vw, -5.5rem);
+            padding-bottom: clamp(1rem, 2vw, 2rem);
+            background:
+                linear-gradient(180deg, rgba(8, 11, 18, 0) 0%, rgba(8, 11, 18, 0.86) 28%, var(--color-bg-alt) 28%, var(--color-bg-alt) 100%);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(1rem, 1.6vw, 1.5rem);
+            max-width: 1480px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .collection-card {
+            height: clamp(270px, 22vw, 360px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            display: block;
+            background: var(--color-bg-alt);
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .collection-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .collection-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: clamp(1.5rem, 2vw, 2.25rem);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: var(--color-white);
+            transform: translateY(20px);
+            transition: transform 0.4s ease;
+        }
+
+        .collection-card:hover .collection-info {
+            transform: translateY(0);
+        }
+
+        .collection-title {
+            font-size: clamp(1.4rem, 1.7vw, 1.85rem);
+            margin-bottom: 0.5rem;
+            color: var(--color-white);
+        }
+
+        .collection-link {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.9;
+            color: var(--color-white);
+        }
+
+        .home-story-section {
+            padding: clamp(3.5rem, 5vw, 5.5rem) 0 !important;
+        }
+
+        .home-story-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: center;
+        }
+
+        .home-story-copy h2 {
+            font-size: clamp(2.1rem, 3vw, 3rem);
+            margin-bottom: 1.25rem;
+        }
+
+        .home-story-copy p {
+            margin-bottom: 1.75rem;
+            font-size: 1.05rem;
+        }
+
+        .home-story-image img {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            max-height: 460px;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1440px) {
+            .home-collections-section {
+                margin-top: -7rem;
+            }
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            transition: transform 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .carousel-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .carousel-arrow-prev {
+                left: 1rem;
+            }
+
+            .carousel-arrow-next {
+                right: 1rem;
+            }
+
+            .carousel-dots {
+                bottom: 2rem;
+            }
+
+            .collections-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+            }
+
+            .collection-card {
+                height: 400px;
+            }
+
+            .home-collections-section {
+                margin-top: 0;
+                padding-top: 1rem;
+                padding-bottom: 2rem;
+                background: var(--color-bg);
+            }
+
+            .home-story-section {
+                padding: 3rem 0 !important;
+            }
+
+            .home-story-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero {
+                height: calc(100svh - 70px);
+                min-height: 540px;
+                background-position: 54% center;
+            }
+
+            /* Fix product section images on mobile */
+            .product-image-wrapper {
+                aspect-ratio: 2/3;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Harry Lahren</a>
+
+
+
+                        <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_alternate10?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/women-collection.jpg"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Kids</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Boys</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=boys-shirts">Shirts & Polos</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-trousers">Trousers & Shorts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-outerwear">Outerwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Girls</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=girls-dresses">Dresses & Skirts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-tops">Tops & Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-outerwear">Outerwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-accessories">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Baby</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=baby-boys">Baby Boys</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-girls">Baby Girls</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-gifts">Newborn Gifts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/little-lahren-collection.jpg"
+                                        alt="Kids Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Little Lahren</h3>
+                                        <a href="shop.html?cat=kids" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customise Your Own Link -->
+                <div class="nav-item">
+                    <a href="customise.html" class="nav-link" style="color: var(--color-accent);">Customise Your Own</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <!-- Men -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                <li><a href="shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                <li><a href="shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                <li><a href="shop.html?cat=men&sub=belts">Belts</a></li>
+                                <li><a href="shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                <li><a href="shop.html?cat=men&col=golf">Golf Performance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">
+                    Women
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                <li><a href="shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                <li><a href="shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                <li><a href="shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                <li><a href="shop.html?cat=women&col=work">Work Essentials</a></li>
+                                <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="mobile-nav-item">
+                <a href="shop.html?cat=kids" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Kids
+                </a>
+            </div>
+
+            <div class="mobile-nav-item">
+                <a href="customise.html" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between; color: var(--color-accent);">
+                    Customise Your Own
+                </a>
+            </div>
+
+            <!-- Journal -->
+            <div class="mobile-nav-item">
+                <a href="journal.html" class="mobile-nav-link" style="display: flex; justify-content: space-between;">
+                    Journal
+                </a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+            <div class="icon-wrapper">
+                <button class="icon-btn search-trigger" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <span class="icon-label">Search</span>
+            </div>
+            <div class="icon-wrapper">
+                <a href="./login.html" class="icon-btn" aria-label="Account">
+                    <i class="fa-regular fa-user"></i>
+                </a>
+                <span class="icon-label">Account</span>
+            </div>
+            <div class="icon-wrapper">
+                <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <div style="position: relative;">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="cart-count">0</span>
+                    </div>
+                </a>
+                <span class="icon-label">Cart</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Hero -->
+    <section class="hero" style="position: relative; overflow: hidden;">
+        <div class="hero-content animate-on-scroll" style="position: relative; z-index: 1; text-align: center; margin: 0 auto; max-width: 900px; pointer-events: none;">
+            <p class="hero-subtitle" style="letter-spacing: 0.3em; font-size: 0.85rem; text-transform: uppercase;">Est. 1981 • London</p>
+            <h1 class="hero-title" style="font-family: var(--font-display); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">Refined British<br>Craftsmanship</h1>
+            <div class="hero-actions" style="justify-content: center; margin-top: 3rem; pointer-events: auto;">
+                <a href="shop.html?cat=men" class="btn btn-primary" style="backdrop-filter: blur(5px);">Shop Gents</a>
+                <a href="shop.html?cat=women" class="btn btn-primary"
+                    style="background: rgba(255, 255, 255, 0.9); color: black; border-color: white;">Shop Women</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Collections -->
+    <section class="container home-collections-section">
+        <div class="collections-grid">
+            <a href="shop.html?cat=men" class="collection-card animate-on-scroll" aria-label="Shop The Gents collection">
+                <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A98026005_alternate10?$plpDeskRF$"
+                    alt="Gents Collection">
+                <div class="collection-info">
+                    <h3 class="collection-title">The Gents</h3>
+                    <span class="collection-link">Discover Collection <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="shop.html?cat=women" class="collection-card animate-on-scroll" aria-label="Shop Women collection">
+                <img src="assets/images/women-collection.jpg"
+                    alt="Women's Collection">
+                <div class="collection-info">
+                    <h3 class="collection-title">Women</h3>
+                    <span class="collection-link">Discover Collection <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+
+            <a href="shop.html?cat=kids" class="collection-card animate-on-scroll" aria-label="Shop Little Lahren collection">
+                <img src="assets/images/little-lahren-collection.jpg"
+                    alt="Kids Collection">
+                <div class="collection-info">
+                    <h3 class="collection-title">Little Lahren</h3>
+                    <span class="collection-link">Discover Collection <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Brand Story Teaser -->
+    <section class="section home-story-section" style="background-color: var(--color-bg-alt);">
+        <div class="container">
+            <div class="home-story-grid">
+                <div class="home-story-copy animate-on-scroll">
+                    <h2>A Legacy of Style</h2>
+                    <p style="color: var(--color-text-muted);">
+                        Est. 1981 in the heart of Mayfair, Harry Lahren has been shaped by impeccable British
+                        tailoring, considered fabrics and a belief that true style should outlast the season.
+                    </p>
+                    <a href="about.html" class="btn btn-secondary">Read Our Story</a>
+                </div>
+                <div class="home-story-image animate-on-scroll">
+                    <img src="assets/images/legacy-atelier.jpg"
+                        alt="Harry Lahren tailoring atelier" style="border-radius: 4px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advanced Footer -->
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage
+                        with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="shop.html?cat=sport">Sport</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="help/shipping.html">Shipping & Returns</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="help/size-guide.html">Size Guide</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="contact.html">Contact Us</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="help/track-order.html">Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="terms.html">Terms of Service</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display: flex; gap: 1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggestions"></div>
+            <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastering the Art of Layering | Harry Lahren Journal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .article-header {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A93287002_lifestyle?$plpDeskRF$') center/cover fixed;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 6rem;
+            color: white;
+        }
+
+        .article-header h1 {
+            color: white !important;
+        }
+
+        .article-header .text-uppercase {
+            color: white !important;
+            opacity: 0.9;
+        }
+
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--color-text-main);
+        }
+
+        .article-content p {
+            margin-bottom: 2rem;
+        }
+
+        .drop-cap::first-letter {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            float: left;
+            line-height: 0.8;
+            margin-right: 1rem;
+            color: var(--color-primary);
+        }
+
+        .pull-quote {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            text-align: center;
+            margin: 4rem 0;
+            color: var(--color-primary);
+            border-top: 2px solid var(--color-accent);
+            border-bottom: 2px solid var(--color-accent);
+            padding: 3rem 2rem;
+            font-style: italic;
+        }
+
+        .article-image-full {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            height: 600px;
+            object-fit: cover;
+            margin-bottom: 4rem;
+        }
+
+        .shop-the-look {
+            background: var(--color-bg-alt);
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .stl-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .article-header {
+                height: 60vh;
+                padding-bottom: 3rem;
+            }
+
+            .article-header h1 {
+                font-size: 2.5rem !important;
+            }
+
+            .article-content {
+                padding: 4rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .pull-quote {
+                font-size: 1.5rem;
+                padding: 2rem 1rem;
+            }
+
+            .article-image-full {
+                height: 400px;
+            }
+
+            .stl-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header (Relative path adjustment) -->
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">Harry Lahren</a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="../shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="../shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A96831002_lifestyle?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="../shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="../shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="../shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A71149017_alternate10?$plpDeskRF$"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="../shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Link (Simple) -->
+                <div class="nav-item">
+                    <a href="../shop.html?cat=kids" class="nav-link">Kids</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="../journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="../login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="../cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <!-- Men -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                <li><a href="../shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                <li><a href="../shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                <li><a href="../shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                <li><a href="../shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                <li><a href="../shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                <li><a href="../shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                <li><a href="../shop.html?cat=men&sub=belts">Belts</a></li>
+                                <li><a href="../shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&col=savile">Savile Row</a></li>
+                                <li><a href="../shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                <li><a href="../shop.html?cat=men&col=golf">Golf Performance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">
+                    Women
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                <li><a href="../shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                <li><a href="../shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                <li><a href="../shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                <li><a href="../shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                <li><a href="../shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                <li><a href="../shop.html?cat=women&sub=bags">Handbags</a></li>
+                                <li><a href="../shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                <li><a href="../shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                <li><a href="../shop.html?cat=women&col=work">Work Essentials</a></li>
+                                <li><a href="../shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="mobile-nav-item">
+                <a href="../shop.html?cat=kids" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Kids
+                </a>
+            </div>
+
+            <!-- Journal -->
+            <div class="mobile-nav-item">
+                <a href="../journal.html" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Journal
+                </a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+
+    </div>
+
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggestions"></div>
+            <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <article>
+        <div class="article-header">
+            <div class="container">
+                <div class="text-uppercase" style="letter-spacing: 0.2em; margin-bottom: 1rem;">Style Guide</div>
+                <h1 style="font-size: 4rem; max-width: 800px; line-height: 1.1;">Mastering the Art of Layering for
+                    Autumn</h1>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p class="drop-cap">
+                As the leaves begin to turn and the air grows crisp, the sartorial landscape shifts. Autumn is arguably
+                the most exciting season for menswear, offering a rich palette of textures, fabrics, and silhouettes to
+                play with. The key to navigating this transition with elegance lies in one fundamental skill: layering.
+            </p>
+            <p>
+                Layering is not merely a practical necessity for fluctuating temperatures; it is an opportunity for
+                expression. It allows for the juxtaposition of materials—pairing the roughness of tweed with the
+                softness of cashmere, or the structure of denim with the fluidity of silk.
+            </p>
+
+            <div class="pull-quote">
+                "True style is not about standing out, but being remembered."
+            </div>
+
+            <p>
+                Start with a solid foundation. A high-quality cotton shirt or a fine merino wool roll-neck serves as the
+                perfect base. From there, introduce a mid-layer such as a cashmere cardigan or a tailored waistcoat.
+                This adds depth and visual interest without compromising on comfort.
+            </p>
+        </div>
+
+        <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI710941439002_alternate10?$plpDeskRF$"
+            alt="Layering Detail" class="article-image-full">
+
+        <div class="article-content">
+            <p>
+                The final layer—the outerwear—is your statement piece. Whether it's a classic trench coat for rainy
+                London afternoons or a structured wool overcoat for formal occasions, ensure it complements the layers
+                beneath rather than concealing them.
+            </p>
+
+            <h2 style="margin-top: 4rem; margin-bottom: 2rem; font-family: var(--font-display);">The Autumn Palette</h2>
+            <p>
+                Autumn's natural color palette offers endless inspiration. Think rich burgundies, deep forest greens,
+                warm
+                caramels, and sophisticated charcoals. These hues not only complement the season but also work
+                harmoniously
+                together, making it easier to create cohesive outfits. At Harry Lahren, we've carefully curated our
+                autumn
+                collection to reflect these timeless tones, ensuring each piece can be mixed and matched effortlessly.
+            </p>
+            <p>
+                Don't shy away from texture either. The interplay between smooth and rough, matte and lustrous, adds
+                visual
+                depth to your ensemble. A brushed cotton shirt paired with a silk pocket square, or corduroy trousers
+                with
+                a smooth leather belt—these subtle contrasts elevate your look from ordinary to exceptional.
+            </p>
+
+            <h2 style="margin-top: 4rem; margin-bottom: 2rem; font-family: var(--font-display);">Fabric Matters</h2>
+            <p>
+                The choice of fabric is paramount in autumn dressing. Merino wool offers warmth without bulk, making it
+                ideal
+                for base layers. Cashmere provides unparalleled softness and insulation for mid-layers. For outerwear,
+                look
+                to heavyweight wools, waxed cotton, or technical fabrics that offer both protection and breathability.
+            </p>
+            <p>
+                Each fabric in our collection is selected not just for its aesthetic appeal, but for its performance. We
+                work
+                exclusively with mills that have been perfecting their craft for generations, ensuring that every
+                garment you
+                invest in will serve you well for years to come.
+            </p>
+
+            <h2 style="margin-top: 4rem; margin-bottom: 2rem; font-family: var(--font-display);">Practical Styling Tips
+            </h2>
+            <p>
+                Start your day with a versatile base that can adapt to changing temperatures. A crisp white shirt or
+                neutral
+                roll-neck provides the perfect foundation. Keep a lightweight cardigan or blazer at the office for
+                cooler
+                mornings, and invest in a quality overcoat that can transition from business meetings to evening events.
+            </p>
+            <p>
+                Remember, successful layering is about balance. If your outer layers are voluminous, keep your base
+                layers
+                fitted. Conversely, if you're wearing a slim-cut coat, you can afford slightly more relaxed layers
+                underneath.
+                The goal is to create a silhouette that looks intentional, not accidental.
+            </p>
+            <p>
+                At Harry Lahren, our Autumn collection is designed with this interplay in mind. Each piece is crafted to
+                work in harmony with the next, creating a cohesive wardrobe that is as functional as it is stylish. We
+                invite
+                you to visit our Savile Row flagship or explore the collection online to discover how these principles
+                can
+                transform your autumn wardrobe.
+            </p>
+        </div>
+
+        <div class="shop-the-look">
+            <div class="container text-center">
+                <h2 style="margin-bottom: 3rem;">Shop The Story</h2>
+                <div class="stl-grid">
+                    <div class="product-card">
+                        <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI710941439002_lifestyle?$plpDeskRF$"
+                            style="width:100%; aspect-ratio:3/4; object-fit:cover; margin-bottom:1rem;">
+                        <h4>Merino Roll Neck</h4>
+                        <p>£120</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A93288005_lifestyle?$plpDeskRF$"
+                            style="width:100%; aspect-ratio:3/4; object-fit:cover; margin-bottom:1rem;">
+                        <h4>Heritage Trench</h4>
+                        <p>£450</p>
+                    </div>
+                    <div class="product-card">
+                        <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785964030003_lifestyle?$plpDeskRF$"
+                            style="width:100%; aspect-ratio:3/4; object-fit:cover; margin-bottom:1rem;">
+                        <h4>Wool Blazer</h4>
+                        <p>£295</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <script src="../js/main.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage
+                        with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=sport">Sport</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/shipping.html">Shipping & Returns</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/size-guide.html">Size Guide</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../terms.html">Terms of Service</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display: flex; gap: 1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

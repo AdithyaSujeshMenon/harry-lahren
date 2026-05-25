@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Cards | Harry Lahren</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gift-hero {
+            min-height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.42)), url('assets/images/hero-fabric-composite.jpg') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .gift-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .gift-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .gift-card {
+            border: 2px solid var(--color-border);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .gift-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-5px);
+        }
+
+        .gift-amount {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-primary);
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Header -->
+        <header class="header">
+            <div class="container nav-container">
+                <a href="./index.html" class="logo">Harry Lahren</a>
+    
+                <!-- Mobile Toggle -->
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+    
+                            <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_alternate10?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/women-collection.jpg"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Kids</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Boys</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=boys-shirts">Shirts & Polos</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-trousers">Trousers & Shorts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-outerwear">Outerwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Girls</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=girls-dresses">Dresses & Skirts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-tops">Tops & Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-outerwear">Outerwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-accessories">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Baby</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=baby-boys">Baby Boys</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-girls">Baby Girls</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-gifts">Newborn Gifts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/little-lahren-collection.jpg"
+                                        alt="Kids Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Little Lahren</h3>
+                                        <a href="shop.html?cat=kids" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customise Your Own Link -->
+                <div class="nav-item">
+                    <a href="customise.html" class="nav-link" style="color: var(--color-accent);">Customise Your Own</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+    
+                <div class="nav-icons">
+                    <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <a href="./login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                    <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    
+        <!-- Mobile Navigation Drawer -->
+        <div class="mobile-nav-drawer" id="mobileNavDrawer">
+            <div class="mobile-nav-header">
+                <span class="logo">Harry Lahren</span>
+                <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <nav class="mobile-nav-content">
+                <!-- Men -->
+                <div class="mobile-nav-item">
+                    <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="mobile-submenu">
+                        <div class="mobile-submenu-grid">
+                            <div class="mobile-submenu-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-submenu-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="./shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-submenu-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="./shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="./shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Women -->
+                <div class="mobile-nav-item">
+                    <div class="mobile-nav-link">
+                        Women
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="mobile-submenu">
+                        <div class="mobile-submenu-grid">
+                            <div class="mobile-submenu-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-submenu-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="./shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mobile-submenu-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="./shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="./shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="./shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Kids -->
+                <div class="mobile-nav-item">
+                    <a href="./shop.html?cat=kids" class="mobile-nav-link" style="display: flex; justify-content: space-between;">
+                        Kids
+                    </a>
+                </div>
+                
+                <!-- Journal -->
+                <div class="mobile-nav-item">
+                    <a href="./journal.html" class="mobile-nav-link" style="display: flex; justify-content: space-between;">
+                        Journal
+                    </a>
+                </div>
+            </nav>
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+
+        </div>
+    
+        <!-- Mobile Nav Backdrop -->
+        <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+    
+        <!-- Search Overlay -->
+        <div class="search-overlay" id="searchOverlay">
+            <div class="search-box">
+                <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+                <div class="suggestions" id="searchSuggestions"></div>
+                <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+            </div>
+        </div>
+
+    <div class="gift-hero">
+        <div class="container">
+            <h1 style="font-size: 3.5rem; color: white; margin-bottom: 1rem;">Gift Cards</h1>
+            <p style="font-size: 1.25rem; max-width: 600px; margin: 0 auto;">The perfect gift for any occasion. Choose
+                from our selection of amounts and let them choose their favorites.</p>
+        </div>
+    </div>
+
+    <div class="container gift-content">
+        <h2 class="text-center" style="margin-bottom: 2rem;">Select Amount</h2>
+
+        <div class="gift-options">
+            <div class="gift-card" onclick="addGiftCard(50)">
+                <i class="fa-solid fa-gift" style="font-size: 3rem; color: var(--color-accent);"></i>
+                <p class="gift-amount">£50</p>
+                <p style="color: var(--color-text-muted);">Perfect starter</p>
+            </div>
+            <div class="gift-card" onclick="addGiftCard(100)">
+                <i class="fa-solid fa-gift" style="font-size: 3rem; color: var(--color-accent);"></i>
+                <p class="gift-amount">£100</p>
+                <p style="color: var(--color-text-muted);">Most popular</p>
+            </div>
+            <div class="gift-card" onclick="addGiftCard(200)">
+                <i class="fa-solid fa-gift" style="font-size: 3rem; color: var(--color-accent);"></i>
+                <p class="gift-amount">£200</p>
+                <p style="color: var(--color-text-muted);">Premium choice</p>
+            </div>
+            <div class="gift-card" onclick="addGiftCard(500)">
+                <i class="fa-solid fa-gift" style="font-size: 3rem; color: var(--color-accent);"></i>
+                <p class="gift-amount">£500</p>
+                <p style="color: var(--color-text-muted);">Ultimate luxury</p>
+            </div>
+        </div>
+
+        <!-- Custom Gift Card Amount -->
+        <div class="custom-gift-section" style="margin-top: 3rem; background: var(--color-white); padding: 2.5rem; border: 1px solid var(--color-border); text-align: center; border-radius: 4px;">
+            <h3 style="margin-bottom: 1rem; font-family: var(--font-display);">Custom Amount</h3>
+            <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Enter a specific value for your gift card.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; align-items: center; max-width: 400px; margin: 0 auto;">
+                <div style="position: relative; flex: 1;">
+                    <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-weight: bold;">£</span>
+                    <input type="number" id="customGiftAmount" min="10" max="2000" step="1" placeholder="Enter amount" style="width: 100%; padding: 0.8rem 1rem 0.8rem 30px; border: 1px solid var(--color-border); border-radius: 4px; font-size: 1rem;">
+                </div>
+                <button class="btn btn-primary" onclick="addCustomGiftCard()">Add to Cart</button>
+            </div>
+        </div>
+
+        <script>
+            function addGiftCard(amount) {
+                const value = Number(amount);
+                const label = typeof formatPrice === 'function' ? formatPrice(value) : `£${value}`;
+                if (typeof addToCart === 'function') {
+                    addToCart({
+                        id: `gift-card-${value}`,
+                        name: `${label} Harry Lahren Gift Card`,
+                        price: value,
+                        image: 'assets/images/hero-fabric-composite.jpg',
+                        category: 'gift-card',
+                        size: 'Digital',
+                        description: 'Digital Harry Lahren gift card for online and in-store use.'
+                    });
+                } else if (typeof showToast === 'function') {
+                    showToast(`${label} Gift Card added to cart`);
+                }
+            }
+
+            function addCustomGiftCard() {
+                const amount = Number(document.getElementById('customGiftAmount').value);
+                if (!amount || amount < 10) {
+                    showToast('Please enter a valid amount (minimum £10)');
+                    return;
+                }
+                if (amount > 2000) {
+                    showToast('Maximum gift card amount is £2000');
+                    return;
+                }
+                addGiftCard(amount);
+                document.getElementById('customGiftAmount').value = '';
+            }
+        </script>
+
+        <div style="margin-top: 4rem; background: var(--color-bg-alt); padding: 2rem; border-radius: 4px;">
+            <h3 style="margin-bottom: 1rem;">Gift Card Benefits</h3>
+            <ul style="list-style: disc; padding-left: 2rem; line-height: 2; color: var(--color-text-muted);">
+                <li>Valid for 12 months from purchase date</li>
+                <li>Can be used online and in-store</li>
+                <li>Delivered instantly via email</li>
+                <li>No additional processing fees</li>
+                <li>Personalize with a custom message</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <button class="btn btn-primary" onclick="window.location.href='contact.html'">Need Help? Contact Us</button>
+        </div>
+    </div>
+
+        <!-- Footer -->
+        <footer class="footer section" style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+            <div class="container">
+                <div class="footer-grid" style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                    <div class="footer-brand">
+                        <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                        <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                            Est. 1981. We craft garments that transcend time, blending heritage with modern sensibility.
+                        </p>
+                        <div class="social-links" style="display: flex; gap: 1rem;">
+                            <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                        </div>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                        <ul style="opacity: 1;">
+                            <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=men">Gents</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=women">Women</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=kids">Kids</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=sport">Sport</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./gift-cards.html">Gift Cards</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                        <ul style="opacity: 1;">
+                            <li style="margin-bottom: 0.8rem;"><a href="./help/shipping.html">Shipping & Returns</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./help/faq.html">FAQ</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./help/size-guide.html">Size Guide</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+    
+                    <div class="footer-col">
+                        <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                        <ul style="opacity: 1;">
+                            <li style="margin-bottom: 0.8rem;"><a href="./privacy.html">Privacy Policy</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./terms.html">Terms of Service</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./cookies.html">Cookie Policy</a></li>
+                            <li style="margin-bottom: 0.8rem;"><a href="./accessibility.html">Accessibility</a></li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="footer-bottom" style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                    <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                    <div class="payment-methods" style="display: flex; gap: 1rem;">
+                        <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                        <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                        <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                        <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    <script src="js/main.js"></script>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

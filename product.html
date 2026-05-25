@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | Harry Lahren</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pdp-container {
+            padding-top: 7rem;
+            padding-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+        }
+
+        .pdp-gallery {
+            display: grid;
+            gap: 1rem;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #f6f4ef;
+        }
+
+        .thumbnail-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .thumbnail-btn {
+            border: 1px solid var(--color-border);
+            background: #f6f4ef;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            border-radius: 4px;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .thumbnail-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail-btn:hover,
+        .thumbnail-btn.active {
+            border-color: var(--color-primary);
+            transform: translateY(-1px);
+        }
+
+        .pdp-info {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .pdp-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pdp-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            font-size: 1.45rem;
+            color: var(--color-primary);
+            margin-bottom: 2rem;
+            font-family: var(--font-body);
+        }
+
+        .pdp-price s {
+            font-size: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .pdp-description {
+            color: var(--color-text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .option-group {
+            margin-bottom: 2rem;
+        }
+
+        .option-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .size-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .size-btn {
+            min-width: 42px;
+            height: 40px;
+            padding: 0 0.85rem;
+            border: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            border-radius: 4px;
+        }
+
+        .size-btn:hover,
+        .size-btn.active {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+            border-color: var(--color-primary);
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1.2rem;
+            font-size: 1rem;
+        }
+
+        .features-list {
+            margin-top: 3rem;
+            border-top: 1px solid var(--color-border);
+            padding-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .pdp-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .pdp-info {
+                position: static;
+            }
+
+            .pdp-title {
+                font-size: 1.9rem;
+            }
+
+            .pdp-gallery {
+                max-width: 100%;
+            }
+
+            .thumbnail-strip {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="./index.html" class="logo">Harry Lahren</a>
+
+                        <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_alternate10?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/women-collection.jpg"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Kids</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Boys</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=boys-shirts">Shirts & Polos</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-trousers">Trousers & Shorts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-outerwear">Outerwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Girls</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=girls-dresses">Dresses & Skirts</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-tops">Tops & Knitwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-outerwear">Outerwear</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-accessories">Accessories</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Baby</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=baby-boys">Baby Boys</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-girls">Baby Girls</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-gifts">Newborn Gifts</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/little-lahren-collection.jpg"
+                                        alt="Kids Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Little Lahren</h3>
+                                        <a href="shop.html?cat=kids" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customise Your Own Link -->
+                <div class="nav-item">
+                    <a href="customise.html" class="nav-link" style="color: var(--color-accent);">Customise Your Own</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="./login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <!-- Men -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                <li><a href="./shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                <li><a href="./shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                <li><a href="./shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                <li><a href="./shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                <li><a href="./shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                <li><a href="./shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                <li><a href="./shop.html?cat=men&sub=belts">Belts</a></li>
+                                <li><a href="./shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=men&col=savile">Savile Row</a></li>
+                                <li><a href="./shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                <li><a href="./shop.html?cat=men&col=golf">Golf Performance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">
+                    Women
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                <li><a href="./shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                <li><a href="./shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                <li><a href="./shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                <li><a href="./shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                <li><a href="./shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                <li><a href="./shop.html?cat=women&sub=bags">Handbags</a></li>
+                                <li><a href="./shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                <li><a href="./shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="./shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                <li><a href="./shop.html?cat=women&col=work">Work Essentials</a></li>
+                                <li><a href="./shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="mobile-nav-item">
+                <a href="./shop.html?cat=kids" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Kids
+                </a>
+            </div>
+
+            <div class="mobile-nav-item">
+                <a href="./customise.html" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between; color: var(--color-accent);">
+                    Customise Your Own
+                </a>
+            </div>
+
+            <!-- Journal -->
+            <div class="mobile-nav-item">
+                <a href="./journal.html" class="mobile-nav-link" style="display: flex; justify-content: space-between;">
+                    Journal
+                </a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="./cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+
+    </div>
+
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggestions"></div>
+            <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <div class="container pdp-container">
+        <div class="pdp-gallery">
+            <img id="main-image" src="" alt="Product" class="main-image">
+            <div id="thumbnail-strip" class="thumbnail-strip"></div>
+        </div>
+
+        <div class="pdp-info">
+            <div id="product-category"
+                style="text-transform: uppercase; color: #999; font-size: 0.8rem; margin-bottom: 0.5rem;"></div>
+            <h1 id="product-name" class="pdp-title"></h1>
+            <div id="product-price" class="pdp-price"></div>
+            <p id="product-desc" class="pdp-description"></p>
+
+            <div class="option-group">
+                <span class="option-label">Select Size</span>
+                <div class="size-grid" id="size-container">
+                    <!-- Sizes injected here -->
+                </div>
+            </div>
+
+            <button id="add-btn" class="btn btn-primary add-to-cart-btn">Add to Shopping Bag</button>
+
+            <div class="features-list">
+                <div class="feature-item"><i class="fa-solid fa-truck"></i> Free Shipping on orders over £200</div>
+                <div class="feature-item"><i class="fa-solid fa-rotate-left"></i> 30-Day Returns Policy</div>
+                <div class="feature-item"><i class="fa-solid fa-shield-halved"></i> Secure Checkout</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // Product Detail Logic
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = parseInt(urlParams.get('id'));
+        const product = window.products.find(p => p.id === productId);
+
+        if (product) {
+            document.title = `${product.name} | Harry Lahren`;
+            const images = product.images && product.images.length ? product.images : [getProductImage(product)];
+            const mainImage = document.getElementById('main-image');
+            const fallbackImage = 'assets/images/hero-fabric-composite.jpg';
+            mainImage.src = images[0] || fallbackImage;
+            mainImage.alt = product.name;
+            mainImage.onerror = () => {
+                mainImage.onerror = null;
+                mainImage.src = fallbackImage;
+            };
+            document.getElementById('product-name').textContent = product.name;
+            document.getElementById('product-price').innerHTML = `${formatPrice(product.price)} <s>${formatPrice(product.compareAtPrice)}</s>`;
+            document.getElementById('product-desc').textContent = product.description;
+            document.getElementById('product-category').textContent = product.category;
+
+            const thumbnailStrip = document.getElementById('thumbnail-strip');
+            thumbnailStrip.innerHTML = images.map((img, index) => `
+                <button class="thumbnail-btn${index === 0 ? ' active' : ''}" type="button" aria-label="View ${product.name} image ${index + 1}" data-src="${img}">
+                    <img src="${img}" alt="${product.name} view ${index + 1}" loading="lazy" onerror="this.onerror=null;this.src='${fallbackImage}';">
+                </button>
+            `).join('');
+
+            thumbnailStrip.addEventListener('click', (event) => {
+                const button = event.target.closest('.thumbnail-btn');
+                if (!button) return;
+                thumbnailStrip.querySelectorAll('.thumbnail-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                mainImage.src = button.dataset.src;
+            });
+
+            const sizeContainer = document.getElementById('size-container');
+            let selectedSize = null;
+
+            // Generate size buttons
+            product.sizes.forEach(size => {
+                const btn = document.createElement('button');
+                btn.className = 'size-btn';
+                btn.textContent = size;
+                btn.onclick = () => {
+                    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedSize = size;
+                };
+                sizeContainer.appendChild(btn);
+            });
+
+            // Add to Cart Logic with visual feedback
+            document.getElementById('add-btn').onclick = () => {
+                if (!selectedSize) {
+                    // Visual shake feedback
+                    sizeContainer.style.animation = 'shake 0.5s';
+                    setTimeout(() => sizeContainer.style.animation = '', 500);
+                    // Toast instead of alert
+                    if (window.showToast) {
+                        window.showToast('Please select a size first');
+                    }
+                    return;
+                }
+                window.addToCart({ ...product, size: selectedSize });
+            };
+        } else {
+            document.querySelector('.pdp-container').innerHTML = '<h2>Product not found</h2>';
+        }
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage
+                        with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./shop.html?cat=sport">Sport</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/shipping.html">Shipping & Returns</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./help/size-guide.html">Size Guide</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="./privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./terms.html">Terms of Service</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="./accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display: flex; gap: 1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

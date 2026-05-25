@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preferences | Harry Lahren</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .account-container {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .account-nav {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .account-nav h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .account-nav a {
+            display: block;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--color-border);
+            color: var(--color-text-muted);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .account-nav a:hover,
+        .account-nav a.active {
+            color: var(--color-primary);
+        }
+
+        .account-nav a i {
+            margin-right: 0.75rem;
+            width: 20px;
+        }
+
+        .pref-section {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pref-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .pref-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 26px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 26px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: var(--color-success);
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        @media (max-width: 900px) {
+            .account-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding-top: 6rem;
+            }
+
+            .account-nav {
+                position: relative;
+                top: 0;
+                background: var(--color-bg-alt);
+                padding: 1.5rem;
+                border-radius: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">Harry Lahren</a>
+            <nav class="nav-menu">
+                <div class="nav-item"><span class="nav-link">Gents</span></div>
+                <div class="nav-item"><span class="nav-link">Women</span></div>
+                <div class="nav-item"><a href="../shop.html?cat=kids" class="nav-link">Kids</a></div>
+                <div class="nav-item"><a href="../journal.html" class="nav-link">Journal</a></div>
+            </nav>
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="../login.html" class="icon-btn"><i class="fa-regular fa-user"></i></a>
+                <a href="../cart.html" class="icon-btn"><i class="fa-solid fa-bag-shopping"></i><span
+                        class="cart-count">0</span></a>
+            </div>
+            <button class="mobile-toggle" id="mobileToggle"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header"><span class="logo">Harry Lahren</span><button class="mobile-close"
+                id="mobileClose"><i class="fa-solid fa-xmark"></i></button></div>
+    
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+</div>
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box"><input type="search" id="searchInput" placeholder="Search for products..." />
+            <div class="suggestions" id="searchSuggestions"></div><button class="btn btn-secondary" id="closeSearchBtn"
+                style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <div class="account-container">
+        <aside class="account-nav">
+            <h3>My Account</h3>
+            <a href="dashboard.html"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+            <a href="profile.html"><i class="fa-solid fa-user"></i>Profile</a>
+            <a href="addresses.html"><i class="fa-solid fa-location-dot"></i>Addresses</a>
+            <a href="payment-methods.html"><i class="fa-solid fa-credit-card"></i>Payment Methods</a>
+            <a href="preferences.html" class="active"><i class="fa-solid fa-sliders"></i>Preferences</a>
+            <a href="../index.html" style="color: var(--color-error);"><i
+                    class="fa-solid fa-right-from-bracket"></i>Sign Out</a>
+        </aside>
+
+        <main>
+            <h1 style="margin-bottom: 2rem;">Preferences</h1>
+
+            <div class="pref-section">
+                <h2 style="margin-bottom: 1.5rem;">Email Notifications</h2>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Order Updates</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Receive emails about your order
+                            status</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Promotions & Offers</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Get exclusive deals and new
+                            arrivals</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Style Tips & Journal</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Fashion advice and editorial
+                            content</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pref-section">
+                <h2 style="margin-bottom: 1.5rem;">Shopping Preferences</h2>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Save for Later</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Automatically save items you view
+                        </p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Personalized Recommendations</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Show products based on your
+                            preferences</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="pref-section">
+                <h2 style="margin-bottom: 1.5rem;">Privacy Settings</h2>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Marketing Cookies</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Allow cookies for personalized ads
+                        </p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="pref-item">
+                    <div>
+                        <h4 style="margin-bottom: 0.25rem;">Analytics</h4>
+                        <p style="color: var(--color-text-muted); font-size: 0.9rem;">Help us improve your experience
+                        </p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="btn btn-primary">Save All Preferences</button>
+        </main>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">Est. 1981.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=women">Women</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../track-order.html">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../privacy.html">Privacy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../terms.html">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; text-align: center; opacity: 0.9;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

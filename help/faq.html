@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Harry Lahren Help Center</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .help-container {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 1rem;
+        }
+
+        .faq-question {
+            width: 100%;
+            text-align: left;
+            padding: 1.5rem 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            color: var(--color-primary);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--color-text-muted);
+            line-height: 1.6;
+        }
+
+        .faq-answer.open {
+            max-height: 300px;
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">Harry Lahren</a>
+
+            <!-- Mobile Toggle -->
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <nav class="nav-menu">
+                <!-- Men Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=belts">Belts</a></li>
+                                    <li><a href="../shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="../shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                    <li><a href="../shop.html?cat=men&col=golf">Golf Performance</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_lifestyle?$plpDeskRF$"
+                                        alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="../shop.html?cat=men" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Women Mega Menu -->
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col">
+                                <h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                    <li><a href="../shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <h4>Collections</h4>
+                                <ul>
+                                    <li><a href="../shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="../shop.html?cat=women&col=work">Work Essentials</a></li>
+                                    <li><a href="../shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-AI785A98033002_alternate10?$plpDeskRF$"
+                                        alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="../shop.html?cat=women" class="btn btn-primary"
+                                            style="margin-top: 1rem; padding: 0.5rem 1.5rem; font-size: 0.7rem;">Shop
+                                            Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kids Link (Simple) -->
+                <div class="nav-item">
+                    <a href="../shop.html?cat=kids" class="nav-link">Kids</a>
+                </div>
+
+                <!-- Journal Link -->
+                <div class="nav-item">
+                    <a href="../journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i
+                        class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="../login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="../cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <!-- Men -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">Gents<i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&sub=new">New Arrivals</a></li>
+                                <li><a href="../shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                <li><a href="../shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                <li><a href="../shop.html?cat=men&sub=trousers">Trousers</a></li>
+                                <li><a href="../shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                <li><a href="../shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                <li><a href="../shop.html?cat=men&sub=ties">Ties & Pocket Squares</a></li>
+                                <li><a href="../shop.html?cat=men&sub=belts">Belts</a></li>
+                                <li><a href="../shop.html?cat=men&sub=bags">Bags & Luggage</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=men&col=savile">Savile Row</a></li>
+                                <li><a href="../shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                <li><a href="../shop.html?cat=men&col=golf">Golf Performance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women -->
+            <div class="mobile-nav-item">
+                <div class="mobile-nav-link">
+                    Women
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="mobile-submenu">
+                    <div class="mobile-submenu-grid">
+                        <div class="mobile-submenu-col">
+                            <h4>Clothing</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&sub=new">New Arrivals</a></li>
+                                <li><a href="../shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                <li><a href="../shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                <li><a href="../shop.html?cat=women&sub=skirts">Skirts</a></li>
+                                <li><a href="../shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                <li><a href="../shop.html?cat=women&sub=outerwear">Coats & Jackets</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Accessories</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                <li><a href="../shop.html?cat=women&sub=bags">Handbags</a></li>
+                                <li><a href="../shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                <li><a href="../shop.html?cat=women&sub=jewelry">Jewelry</a></li>
+                            </ul>
+                        </div>
+                        <div class="mobile-submenu-col">
+                            <h4>Collections</h4>
+                            <ul>
+                                <li><a href="../shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                <li><a href="../shop.html?cat=women&col=work">Work Essentials</a></li>
+                                <li><a href="../shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kids -->
+            <div class="mobile-nav-item">
+                <a href="../shop.html?cat=kids" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Kids
+                </a>
+            </div>
+
+            <!-- Journal -->
+            <div class="mobile-nav-item">
+                <a href="../journal.html" class="mobile-nav-link"
+                    style="display: flex; justify-content: space-between;">
+                    Journal
+                </a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+                    <div class="icon-wrapper">
+                        <button class="icon-btn search-trigger" aria-label="Search">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </button>
+                        <span class="icon-label">Search</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../login.html" class="icon-btn" aria-label="Account">
+                            <i class="fa-regular fa-user"></i>
+                        </a>
+                        <span class="icon-label">Account</span>
+                    </div>
+                    <div class="icon-wrapper">
+                        <a href="../cart.html" class="icon-btn" aria-label="Shopping cart">
+                            <div style="position: relative;">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                                <span class="cart-count">0</span>
+                            </div>
+                        </a>
+                        <span class="icon-label">Cart</span>
+                    </div>
+                </div>
+
+    </div>
+
+    <!-- Mobile Nav Backdrop -->
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search for products..." autocomplete="off" />
+            <div class="suggestions" id="searchSuggestions"></div>
+            <button class="btn btn-secondary" id="closeSearchBtn" style="margin-top: 1rem; width: 100%;">Close</button>
+        </div>
+    </div>
+
+    <div class="container help-container">
+        <h1 class="text-center" style="margin-bottom: 3rem;">Frequently Asked Questions</h1>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What are your shipping options?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>We offer Standard Shipping (3-5 business days) and Express Shipping (1-2 business days).
+                    International shipping is also available to over 50 countries.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I return an item?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Returns are accepted within 30 days of purchase. Simply visit our Returns Portal to generate a
+                    prepaid shipping label. Items must be unworn and in original packaging.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you offer alterations?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Yes, complimentary alterations are available for suits and trousers purchased in-store. For online
+                    orders, we recommend visiting a local tailor for the perfect fit.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Where are your clothes made?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Our garments are crafted in Italy, Portugal, and the United Kingdom, working with partners who share
+                    our commitment to quality and ethical labor practices.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do I find my size?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Please refer to our comprehensive Size Guide which includes detailed measurements for all garment
+                    types.
+                    We recommend measuring a well-fitting garment you already own and comparing it to our size charts.
+                    If you're
+                    between sizes, we suggest sizing up for a more relaxed fit.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you offer bespoke tailoring services?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Yes, our Savile Row flagship offers full bespoke tailoring services. The process begins with a
+                    personal
+                    consultation, followed by multiple fittings to ensure a perfect fit. Bespoke suits typically take
+                    8-12 weeks
+                    to complete. Please contact our Savile Row location to schedule a consultation.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How should I care for my Harry Lahren garments?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Care instructions are specific to each garment and can be found on the care label. Generally, we
+                    recommend
+                    dry cleaning for suits and tailored pieces, while knitwear should be hand-washed in cold water and
+                    laid flat
+                    to dry. For specific care advice, please consult our detailed Care Guide or contact our customer
+                    service team.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I track my order?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Yes, once your order ships, you'll receive a tracking number via email. You can also track your order
+                    by
+                    logging into your account and viewing your order history. If you checked out as a guest, use the
+                    tracking link
+                    provided in your shipping confirmation email.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Do you ship internationally?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Yes, we ship to over 50 countries worldwide. International shipping times vary by destination but
+                    typically
+                    range from 5-10 business days. Please note that customs duties and import taxes may apply and are
+                    the
+                    responsibility of the recipient. These charges are not included in your order total.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                How do gift cards work?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Gift cards are delivered instantly via email and can be used both online and in-store. They're valid
+                    for
+                    12 months from the date of purchase and can be applied to any Harry Lahren product. Gift cards are
+                    non-refundable
+                    but can be combined with other payment methods if the purchase exceeds the card value.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                Can I modify or cancel my order?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>Orders can be modified or cancelled within 2 hours of placement. After this window, orders enter our
+                    fulfillment process and cannot be changed. If you need to make changes, please contact our customer
+                    service
+                    team immediately at customercare@harrylahren.com or call +44 20 7123 4567.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">
+                What is your sustainability commitment?
+                <i class="fa-solid fa-chevron-down faq-icon"></i>
+            </button>
+            <div class="faq-answer">
+                <p>We're committed to sustainable practices throughout our supply chain. This includes sourcing from
+                    certified
+                    sustainable mills, implementing zero-waste cutting techniques, offering a garment repair service to
+                    extend product
+                    life, and using recyclable packaging materials. We also partner with factories that maintain fair
+                    labor practices
+                    and safe working conditions.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.classList.toggle('active');
+                const answer = btn.nextElementSibling;
+                answer.classList.toggle('open');
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer section"
+        style="background-color: #050505; color: #ffffff; padding-bottom: 2rem;">
+        <div class="container">
+            <div class="footer-grid"
+                style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color: white; margin-bottom: 1.5rem;">Harry Lahren</h2>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 2rem; max-width: 300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage
+                        with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display: flex; gap: 1rem;">
+                        <a href="#" style="color: white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color: white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Shop</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../shop.html?cat=sport">Sport</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Help</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/shipping.html">Shipping & Returns</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/faq.html">FAQ</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../help/size-guide.html">Size Guide</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 style="color: var(--color-accent); margin-bottom: 1.5rem;">Legal</h4>
+                    <ul style="opacity: 1;">
+                        <li style="margin-bottom: 0.8rem;"><a href="../privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../terms.html">Terms of Service</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom: 0.8rem;"><a href="../accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom"
+                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; opacity: 0.9; font-size: 0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display: flex; gap: 1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size: 1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size: 1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+
+
+</html>

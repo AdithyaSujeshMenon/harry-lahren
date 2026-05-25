@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customise Your Own | Harry Lahren</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .customise-hero {
+            height: 50vh;
+            min-height: 400px;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,0.58), rgba(0,0,0,0.2), rgba(0,0,0,0.52)),
+                url("assets/images/hero-fabric-composite.jpg") center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .customise-hero > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        .customise-hero p:first-child {
+            letter-spacing: 0.3em;
+            margin-bottom: 1rem;
+            color: var(--color-accent);
+            font-size: 0.85rem;
+        }
+
+        .customise-hero h1 {
+            font-size: 3.5rem;
+            color: var(--color-accent);
+            font-family: var(--font-display);
+            margin: 0;
+        }
+
+        .customise-hero p:last-child {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 1rem;
+            margin-bottom: 0;
+        }
+
+        .customise-builder {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .builder-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        .preview-card {
+            background: var(--color-bg-alt);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            position: sticky;
+            top: 120px;
+        }
+
+        .preview-card .preview-icon {
+            font-size: 5rem;
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 1.5rem 0;
+        }
+
+        .preview-details {
+            text-align: left;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .preview-details .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+        }
+
+        .preview-details .detail-row span:last-child {
+            font-weight: 600;
+            color: var(--color-text-main);
+        }
+
+        .step-section {
+            margin-bottom: 3rem;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .step-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .option-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .option-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .option-card {
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .option-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .option-card.selected {
+            border-color: var(--color-accent);
+            background: rgba(212, 175, 55, 0.05);
+            box-shadow: 0 0 0 1px var(--color-accent);
+        }
+
+        .option-card .option-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .option-card .option-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+        }
+
+        .option-card .option-price {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 0.3rem;
+            display: block;
+        }
+
+        .fabric-swatch {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 6px;
+            margin-bottom: 0.5rem;
+            border: 2px solid transparent;
+        }
+
+        .colour-dot {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 auto 0.5rem;
+            border: 2px solid var(--color-border);
+        }
+
+        .monogram-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-align: center;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            transition: border-color 0.3s;
+            max-width: 200px;
+        }
+
+        .monogram-input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .monogram-styles {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .monogram-style {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .monogram-style.selected {
+            border-color: var(--color-accent);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .add-to-cart-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .timeline-note {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: rgba(212, 175, 55, 0.08);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .timeline-note i {
+            color: var(--color-accent);
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo">Harry Lahren</a>
+
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <span class="nav-link">Gents</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col"><h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=suits">Suits & Blazers</a></li>
+                                    <li><a href="shop.html?cat=men&sub=shirts">Shirts</a></li>
+                                    <li><a href="shop.html?cat=men&sub=knitwear">Knitwear</a></li>
+                                    <li><a href="shop.html?cat=men&sub=outerwear">Coats & Jackets</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=men&sub=ties">Ties</a></li>
+                                    <li><a href="shop.html?cat=men&sub=bags">Bags</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=men&col=savile">Savile Row</a></li>
+                                    <li><a href="shop.html?cat=men&col=weekend">Weekend Edit</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="https://dtcralphlauren.scene7.com/is/image/PoloGSI/s7-1266689_alternate10?$plpDeskRF$" alt="Gents Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>The Autumn Edit</h3>
+                                        <a href="shop.html?cat=men" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1.5rem;font-size:0.7rem;">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-link">Women</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col"><h4>Clothing</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=women&sub=blouses">Blouses & Tops</a></li>
+                                    <li><a href="shop.html?cat=women&sub=knitwear">Knitwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Accessories</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&sub=shoes">Shoes</a></li>
+                                    <li><a href="shop.html?cat=women&sub=bags">Handbags</a></li>
+                                    <li><a href="shop.html?cat=women&sub=scarves">Scarves</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Collections</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=women&col=evening">Evening Wear</a></li>
+                                    <li><a href="shop.html?cat=women&col=cashmere">Pure Cashmere</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/women-collection.jpg" alt="Women's Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Modern Elegance</h3>
+                                        <a href="shop.html?cat=women" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1.5rem;font-size:0.7rem;">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <span class="nav-link">Kids</span>
+                    <div class="mega-menu">
+                        <div class="container mega-menu-grid">
+                            <div class="mega-col"><h4>Boys</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=boys-shirts">Shirts & Polos</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=boys-outerwear">Outerwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Girls</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=girls-dresses">Dresses</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=girls-tops">Tops & Knitwear</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col"><h4>Baby</h4>
+                                <ul>
+                                    <li><a href="shop.html?cat=kids&sub=baby-boys">Baby Boys</a></li>
+                                    <li><a href="shop.html?cat=kids&sub=baby-girls">Baby Girls</a></li>
+                                </ul>
+                            </div>
+                            <div class="mega-col">
+                                <div class="mega-featured">
+                                    <img src="assets/images/little-lahren-collection.jpg" alt="Kids Collection">
+                                    <div class="mega-featured-content">
+                                        <h3>Little Lahren</h3>
+                                        <a href="shop.html?cat=kids" class="btn btn-primary" style="margin-top:1rem;padding:0.5rem 1.5rem;font-size:0.7rem;">Shop Now</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="customise.html" class="nav-link" style="color: var(--color-accent);">Customise Your Own</a>
+                </div>
+                <div class="nav-item">
+                    <a href="journal.html" class="nav-link">Journal</a>
+                </div>
+            </nav>
+
+            <div class="nav-icons">
+                <button class="icon-btn search-trigger" id="searchToggle" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <a href="login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <a href="cart.html" class="icon-btn" aria-label="Shopping cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle mobile menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+        <div class="mobile-nav-header">
+            <span class="logo">Harry Lahren</span>
+            <button class="mobile-close" id="mobileClose" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav-content">
+            <div class="mobile-nav-item">
+                <a href="shop.html?cat=men" class="mobile-nav-link" style="display:flex;justify-content:space-between;">Gents</a>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="shop.html?cat=women" class="mobile-nav-link" style="display:flex;justify-content:space-between;">Women</a>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="shop.html?cat=kids" class="mobile-nav-link" style="display:flex;justify-content:space-between;">Kids</a>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="customise.html" class="mobile-nav-link" style="display:flex;justify-content:space-between;color:var(--color-accent);">Customise Your Own</a>
+            </div>
+            <div class="mobile-nav-item">
+                <a href="journal.html" class="mobile-nav-link" style="display:flex;justify-content:space-between;">Journal</a>
+            </div>
+        </nav>
+        <div class="mobile-nav-icons">
+            <div class="icon-wrapper">
+                <button class="icon-btn search-trigger" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <span class="icon-label">Search</span>
+            </div>
+            <div class="icon-wrapper">
+                <a href="login.html" class="icon-btn" aria-label="Account"><i class="fa-regular fa-user"></i></a>
+                <span class="icon-label">Account</span>
+            </div>
+            <div class="icon-wrapper">
+                <a href="cart.html" class="icon-btn" aria-label="Cart">
+                    <div style="position:relative;"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></div>
+                </a>
+                <span class="icon-label">Cart</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
+
+    <!-- Hero -->
+    <div class="customise-hero">
+        <div>
+            <p class="text-uppercase">Bespoke Service</p>
+            <h1>Customise Your Own</h1>
+            <p>Design a garment that is uniquely yours. Choose your fabric, fit, colour and personalise with a monogram.</p>
+        </div>
+    </div>
+
+    <!-- Builder -->
+    <div class="customise-builder">
+        <div class="builder-grid">
+            <!-- Left: Options -->
+            <div>
+                <!-- Step 1: Collection -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3>Choose Your Collection</h3>
+                    </div>
+                    <div class="option-grid" id="collectionOptions">
+                        <div class="option-card selected" data-collection="Gents" data-category="men" data-price-add="0">
+                            <span class="option-icon"><i class="fa-solid fa-user-tie"></i></span>
+                            <span class="option-name">Gents</span>
+                            <span class="option-price">Tailored classics</span>
+                        </div>
+                        <div class="option-card" data-collection="Women" data-category="women" data-price-add="0">
+                            <span class="option-icon"><i class="fa-solid fa-person-dress"></i></span>
+                            <span class="option-name">Women</span>
+                            <span class="option-price">Modern polish</span>
+                        </div>
+                        <div class="option-card" data-collection="Little Lahren" data-category="kids" data-price-add="-25">
+                            <span class="option-icon"><i class="fa-solid fa-child-reaching"></i></span>
+                            <span class="option-name">Little Lahren</span>
+                            <span class="option-price">Youth sizing</span>
+                        </div>
+                        <div class="option-card" data-collection="Sport" data-category="sport" data-price-add="20">
+                            <span class="option-icon"><i class="fa-solid fa-person-running"></i></span>
+                            <span class="option-name">Sport</span>
+                            <span class="option-price">Performance finish</span>
+                        </div>
+                        <div class="option-card" data-collection="Accessories" data-category="accessories" data-price-add="-40">
+                            <span class="option-icon"><i class="fa-solid fa-briefcase"></i></span>
+                            <span class="option-name">Accessories</span>
+                            <span class="option-price">Small goods</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Garment -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3>Choose Your Garment</h3>
+                    </div>
+                    <div class="option-grid" id="garmentOptions">
+                        <div class="option-card selected" data-garment="shirt" data-price="90">
+                            <span class="option-icon"><i class="fa-solid fa-shirt"></i></span>
+                            <span class="option-name">Shirt</span>
+                            <span class="option-price">From £90</span>
+                        </div>
+                        <div class="option-card" data-garment="suit" data-price="425">
+                            <span class="option-icon"><i class="fa-solid fa-user-tie"></i></span>
+                            <span class="option-name">Suit</span>
+                            <span class="option-price">From £425</span>
+                        </div>
+                        <div class="option-card" data-garment="blazer" data-price="225">
+                            <span class="option-icon"><i class="fa-solid fa-vest-patches"></i></span>
+                            <span class="option-name">Blazer</span>
+                            <span class="option-price">From £225</span>
+                        </div>
+                        <div class="option-card" data-garment="trousers" data-price="110">
+                            <span class="option-icon"><i class="fa-solid fa-socks"></i></span>
+                            <span class="option-name">Trousers</span>
+                            <span class="option-price">From £110</span>
+                        </div>
+                        <div class="option-card" data-garment="coat" data-price="375">
+                            <span class="option-icon"><i class="fa-solid fa-mitten"></i></span>
+                            <span class="option-name">Overcoat</span>
+                            <span class="option-price">From £375</span>
+                        </div>
+                        <div class="option-card" data-garment="waistcoat" data-price="140">
+                            <span class="option-icon"><i class="fa-solid fa-diamond"></i></span>
+                            <span class="option-name">Waistcoat</span>
+                            <span class="option-price">From £140</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Fabric -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3>Select Your Fabric</h3>
+                    </div>
+                    <div class="option-grid" id="fabricOptions">
+                        <div class="option-card selected" data-fabric="Italian Wool" data-price-add="0">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#1e293b,#334155);"></div>
+                            <span class="option-name">Italian Wool</span>
+                            <span class="option-price">Included</span>
+                        </div>
+                        <div class="option-card" data-fabric="Scottish Tweed" data-price-add="30">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#78350f,#92400e);"></div>
+                            <span class="option-name">Scottish Tweed</span>
+                            <span class="option-price">+ £30</span>
+                        </div>
+                        <div class="option-card" data-fabric="Egyptian Cotton" data-price-add="15">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#f5f5f4,#e7e5e4);"></div>
+                            <span class="option-name">Egyptian Cotton</span>
+                            <span class="option-price">+ £15</span>
+                        </div>
+                        <div class="option-card" data-fabric="Pure Cashmere" data-price-add="100">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#d6d3d1,#a8a29e);"></div>
+                            <span class="option-name">Pure Cashmere</span>
+                            <span class="option-price">+ £100</span>
+                        </div>
+                        <div class="option-card" data-fabric="Irish Linen" data-price-add="22">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#fef3c7,#fde68a);"></div>
+                            <span class="option-name">Irish Linen</span>
+                            <span class="option-price">+ £22</span>
+                        </div>
+                        <div class="option-card" data-fabric="Silk Blend" data-price-add="60">
+                            <div class="fabric-swatch" style="background:linear-gradient(135deg,#d4af37,#b4942b);"></div>
+                            <span class="option-name">Silk Blend</span>
+                            <span class="option-price">+ £60</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Colour -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3>Choose Your Colour</h3>
+                    </div>
+                    <div class="option-grid" id="colourOptions">
+                        <div class="option-card selected" data-colour="Navy">
+                            <div class="colour-dot" style="background:#0f172a;"></div>
+                            <span class="option-name">Navy</span>
+                        </div>
+                        <div class="option-card" data-colour="Charcoal">
+                            <div class="colour-dot" style="background:#374151;"></div>
+                            <span class="option-name">Charcoal</span>
+                        </div>
+                        <div class="option-card" data-colour="Black">
+                            <div class="colour-dot" style="background:#000;"></div>
+                            <span class="option-name">Black</span>
+                        </div>
+                        <div class="option-card" data-colour="Burgundy">
+                            <div class="colour-dot" style="background:#7f1d1d;"></div>
+                            <span class="option-name">Burgundy</span>
+                        </div>
+                        <div class="option-card" data-colour="Camel">
+                            <div class="colour-dot" style="background:#b8860b;"></div>
+                            <span class="option-name">Camel</span>
+                        </div>
+                        <div class="option-card" data-colour="White">
+                            <div class="colour-dot" style="background:#fff;border:2px solid #ddd;"></div>
+                            <span class="option-name">White</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 5: Fit -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <h3>Select Your Fit</h3>
+                    </div>
+                    <div class="option-grid" style="grid-template-columns:repeat(3,1fr);" id="fitOptions">
+                        <div class="option-card" data-fit="Slim">
+                            <span class="option-icon"><i class="fa-solid fa-compress"></i></span>
+                            <span class="option-name">Slim</span>
+                        </div>
+                        <div class="option-card selected" data-fit="Regular">
+                            <span class="option-icon"><i class="fa-solid fa-arrows-left-right"></i></span>
+                            <span class="option-name">Regular</span>
+                        </div>
+                        <div class="option-card" data-fit="Relaxed">
+                            <span class="option-icon"><i class="fa-solid fa-expand"></i></span>
+                            <span class="option-name">Relaxed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Monogram -->
+                <div class="step-section">
+                    <div class="step-header">
+                        <div class="step-number">6</div>
+                        <h3>Add a Monogram <span style="font-size:0.8rem;color:var(--color-text-muted);font-weight:400;">(Optional — + £25)</span></h3>
+                    </div>
+                    <input type="text" class="monogram-input" id="monogramInput" placeholder="ABC" maxlength="4">
+                    <div class="monogram-styles" id="monogramStyles">
+                        <div class="monogram-style selected" data-style="Classic" style="font-family:serif;font-style:italic;">Classic</div>
+                        <div class="monogram-style" data-style="Modern" style="font-family:sans-serif;font-weight:700;letter-spacing:0.1em;">Modern</div>
+                        <div class="monogram-style" data-style="Script" style="font-family:'Playfair Display',serif;font-style:italic;">Script</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Preview -->
+            <div>
+                <div class="preview-card" id="previewCard">
+                    <div class="preview-icon"><i class="fa-solid fa-shirt"></i></div>
+                    <h3 id="previewTitle">Custom Shirt</h3>
+                    <p style="color:var(--color-text-muted);font-size:0.9rem;">Bespoke, handcrafted in London</p>
+                    <div class="preview-price" id="previewPrice">£90</div>
+
+                    <div class="preview-details">
+                        <div class="detail-row"><span>Collection</span><span id="detailCollection">Gents</span></div>
+                        <div class="detail-row"><span>Garment</span><span id="detailGarment">Shirt</span></div>
+                        <div class="detail-row"><span>Fabric</span><span id="detailFabric">Italian Wool</span></div>
+                        <div class="detail-row"><span>Colour</span><span id="detailColour">Navy</span></div>
+                        <div class="detail-row"><span>Fit</span><span id="detailFit">Regular</span></div>
+                        <div class="detail-row" id="monogramRow" style="display:none;"><span>Monogram</span><span id="detailMonogram">—</span></div>
+                    </div>
+
+                    <div class="add-to-cart-section">
+                        <div class="timeline-note">
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Estimated delivery: 4–6 weeks from order confirmation.</span>
+                        </div>
+                        <button class="btn btn-primary" style="width:100%;" onclick="addCustomToCart()">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer section" style="background-color:#050505;color:#ffffff;padding-bottom:2rem;">
+        <div class="container">
+            <div class="footer-grid" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem;">
+                <div class="footer-brand">
+                    <h2 class="logo" style="color:white;margin-bottom:1.5rem;">Harry Lahren</h2>
+                    <p style="color:rgba(255,255,255,0.95);margin-bottom:2rem;max-width:300px;">
+                        Est. 1981. We craft garments that transcend time, blending heritage with modern sensibility.
+                    </p>
+                    <div class="social-links" style="display:flex;gap:1rem;">
+                        <a href="#" style="color:white;"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" style="color:white;"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" style="color:white;"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" style="color:white;"><i class="fa-brands fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color:var(--color-accent);margin-bottom:1.5rem;">Shop</h4>
+                    <ul style="opacity:1;">
+                        <li style="margin-bottom:0.8rem;"><a href="shop.html?cat=men">Gents</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="shop.html?cat=women">Women</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="shop.html?cat=kids">Kids</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="gift-cards.html">Gift Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color:var(--color-accent);margin-bottom:1.5rem;">Help</h4>
+                    <ul style="opacity:1;">
+                        <li style="margin-bottom:0.8rem;"><a href="contact.html">Contact Us</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="privacy.html">Privacy Policy</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 style="color:var(--color-accent);margin-bottom:1.5rem;">Legal</h4>
+                    <ul style="opacity:1;">
+                        <li style="margin-bottom:0.8rem;"><a href="cookies.html">Cookie Policy</a></li>
+                        <li style="margin-bottom:0.8rem;"><a href="accessibility.html">Accessibility</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:2rem;display:flex;justify-content:space-between;align-items:center;opacity:0.9;font-size:0.9rem;">
+                <p>&copy; Est. 1981 Harry Lahren. All rights reserved.</p>
+                <div class="payment-methods" style="display:flex;gap:1rem;">
+                    <i class="fa-brands fa-cc-visa" style="font-size:1.5rem;"></i>
+                    <i class="fa-brands fa-cc-mastercard" style="font-size:1.5rem;"></i>
+                    <i class="fa-brands fa-cc-amex" style="font-size:1.5rem;"></i>
+                    <i class="fa-brands fa-cc-paypal" style="font-size:1.5rem;"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // State
+        const state = {
+            collection: 'Gents',
+            category: 'men',
+            collectionAdd: 0,
+            garment: 'shirt',
+            garmentPrice: 90,
+            fabric: 'Italian Wool',
+            fabricAdd: 0,
+            colour: 'Navy',
+            fit: 'Regular',
+            monogram: '',
+            monogramStyle: 'Classic'
+        };
+
+        const garmentNames = {
+            shirt: 'Shirt', suit: 'Suit', blazer: 'Blazer',
+            trousers: 'Trousers', coat: 'Overcoat', waistcoat: 'Waistcoat'
+        };
+
+        const garmentIcons = {
+            shirt: 'fa-shirt', suit: 'fa-user-tie', blazer: 'fa-vest-patches',
+            trousers: 'fa-socks', coat: 'fa-mitten', waistcoat: 'fa-diamond'
+        };
+
+        function updatePreview() {
+            const hasMonogram = state.monogram.trim().length > 0;
+            const monogramCost = hasMonogram ? 25 : 0;
+            const total = Math.max(25, state.garmentPrice + state.collectionAdd + state.fabricAdd + monogramCost);
+
+            document.getElementById('previewTitle').textContent = `Custom ${state.collection} ${garmentNames[state.garment]}`;
+            document.getElementById('previewPrice').textContent = formatPrice(total);
+            document.querySelector('.preview-icon i').className = `fa-solid ${garmentIcons[state.garment]}`;
+            document.getElementById('detailCollection').textContent = state.collection;
+            document.getElementById('detailGarment').textContent = garmentNames[state.garment];
+            document.getElementById('detailFabric').textContent = state.fabric;
+            document.getElementById('detailColour').textContent = state.colour;
+            document.getElementById('detailFit').textContent = state.fit;
+
+            const monogramRow = document.getElementById('monogramRow');
+            if (hasMonogram) {
+                monogramRow.style.display = 'flex';
+                document.getElementById('detailMonogram').textContent = `"${state.monogram}" (${state.monogramStyle})`;
+            } else {
+                monogramRow.style.display = 'none';
+            }
+        }
+
+        function setupOptionGroup(containerId, stateKey, priceKey) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    container.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+
+                    if (stateKey === 'collection') {
+                        state.collection = card.dataset.collection;
+                        state.category = card.dataset.category;
+                        state.collectionAdd = parseInt(card.dataset.priceAdd);
+                    } else if (stateKey === 'garment') {
+                        state.garment = card.dataset.garment;
+                        state.garmentPrice = parseInt(card.dataset.price);
+                    } else if (stateKey === 'fabric') {
+                        state.fabric = card.dataset.fabric;
+                        state.fabricAdd = parseInt(card.dataset.priceAdd);
+                    } else if (stateKey === 'colour') {
+                        state.colour = card.dataset.colour;
+                    } else if (stateKey === 'fit') {
+                        state.fit = card.dataset.fit;
+                    }
+                    updatePreview();
+                });
+            });
+        }
+
+        setupOptionGroup('collectionOptions', 'collection');
+        setupOptionGroup('garmentOptions', 'garment');
+        setupOptionGroup('fabricOptions', 'fabric');
+        setupOptionGroup('colourOptions', 'colour');
+        setupOptionGroup('fitOptions', 'fit');
+
+        // Monogram input
+        const monogramInput = document.getElementById('monogramInput');
+        if (monogramInput) {
+            monogramInput.addEventListener('input', () => {
+                state.monogram = monogramInput.value.toUpperCase();
+                monogramInput.value = state.monogram;
+                updatePreview();
+            });
+        }
+
+        // Monogram style
+        document.querySelectorAll('#monogramStyles .monogram-style').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('#monogramStyles .monogram-style').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                state.monogramStyle = btn.dataset.style;
+                updatePreview();
+            });
+        });
+
+        function addCustomToCart() {
+            const hasMonogram = state.monogram.trim().length > 0;
+            const monogramCost = hasMonogram ? 25 : 0;
+            const total = Math.max(25, state.garmentPrice + state.collectionAdd + state.fabricAdd + monogramCost);
+            const description = `Custom ${state.collection} ${garmentNames[state.garment]} in ${state.colour} ${state.fabric} (${state.fit} fit)${hasMonogram ? ` — Monogram: "${state.monogram}"` : ''}`;
+            const collectionImages = {
+                men: 'assets/images/legacy-atelier.jpg',
+                women: 'assets/images/women-collection.jpg',
+                kids: 'assets/images/little-lahren-collection.jpg',
+                sport: 'assets/images/hero-fabric-composite.jpg',
+                accessories: 'assets/images/legacy-atelier.jpg'
+            };
+            
+            if (typeof addToCart === 'function') {
+                addToCart({
+                    id: `custom-${Date.now()}`,
+                    name: `Custom ${state.collection} ${garmentNames[state.garment]}`,
+                    price: total,
+                    image: collectionImages[state.category] || 'assets/images/hero-fabric-composite.jpg',
+                    category: state.category,
+                    size: state.fit,
+                    description
+                });
+            } else if (typeof showToast === 'function') {
+                showToast(`${description} — ${formatPrice(total)} added to cart`);
+            } else {
+                alert(`${description} — ${formatPrice(total)} added to cart`);
+            }
+        }
+
+        updatePreview();
+    </script>
+    <script type="module" src="js/motion-animations.js"></script>
+</body>
+</html>
